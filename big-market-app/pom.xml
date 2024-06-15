@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [
+        <!ELEMENT project (modelVersion|parent|artifactId|packaging|dependencies|build)*>
+        <!ATTLIST project
+                xmlns CDATA #REQUIRED
+                xmlns:xsi CDATA #REQUIRED
+                xsi:schemaLocation CDATA #REQUIRED>
+        <!ELEMENT modelVersion (#PCDATA)>
+        <!ELEMENT parent (groupId|artifactId|version)*>
+        <!ELEMENT groupId (#PCDATA)>
+        <!ELEMENT artifactId (#PCDATA)>
+        <!ELEMENT version (#PCDATA)>
+        <!ELEMENT packaging (#PCDATA)>
+        <!ELEMENT dependencies (dependency)*>
+        <!ELEMENT dependency (groupId|artifactId|scope|version)*>
+        <!ELEMENT scope (#PCDATA)>
+        <!ELEMENT build (finalName|resources|testResources|plugins)*>
+        <!ELEMENT finalName (#PCDATA)>
+        <!ELEMENT resources (resource)*>
+        <!ELEMENT resource (directory|filtering|includes)*>
+        <!ELEMENT directory (#PCDATA)>
+        <!ELEMENT filtering (#PCDATA)>
+        <!ELEMENT includes (include)*>
+        <!ELEMENT include (#PCDATA)>
+        <!ELEMENT testResources (testResource)*>
+        <!ELEMENT testResource (directory|filtering|includes)*>
+        <!ELEMENT plugins (plugin)*>
+        <!ELEMENT plugin (groupId|artifactId|version|configuration)*>
+        <!ELEMENT configuration (skipTests|testFailureIgnore|includes|mainClass|layout)*>
+        <!ELEMENT skipTests (#PCDATA)>
+        <!ELEMENT testFailureIgnore (#PCDATA)>
+        <!ELEMENT mainClass (#PCDATA)>
+        <!ELEMENT layout (#PCDATA)>
+        ]>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -39,6 +72,10 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
