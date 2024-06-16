@@ -1,6 +1,8 @@
 package com.tut.domain.strategy.repository;
 
 import com.tut.domain.strategy.model.StrategyAwardEntity;
+import com.tut.domain.strategy.model.StrategyEntity;
+import com.tut.domain.strategy.model.StrategyRuleEntity;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,11 +15,49 @@ import java.util.List;
 
 public interface IStrategyRepository {
 
+    /**
+     * 获取策略奖品列表
+     * @param strategyId 策略ID
+     * @return 策略奖品列表
+     */
     List<StrategyAwardEntity>  queryAwardsByStrategyId(Long strategyId);
 
-    void storeStrategyAwardSearchRateTable(Long strategyId, int size, LinkedHashMap<Integer, Integer> shuffledStrategyAwardSearchRateTable);
+    /**
+     * 获取策略实体
+     * @param strategyId 策略ID
+     * @return StrategyEntity
+     */
+    StrategyEntity queryStrategyEntityByStrategyId(Long strategyId);
 
-    int getRateRange(Long strategyId);
+    /**
+     * 存储抽奖策略范围值、概率查找表
+     * @param key 策略ID
+     * @param size 抽奖策略范围值
+     * @param shuffledStrategyAwardSearchRateTable 乱序策略奖品表
+     */
+    void storeStrategyAwardSearchRateTable(String key, int size, LinkedHashMap<Integer, Integer> shuffledStrategyAwardSearchRateTable);
 
-    Integer getStrategyAwardAssemble(Long strategyId, int rateRage, int i);
+    /**
+     * 查询抽奖策略范围值
+     * @param strategyId 策略ID
+     * @return 抽奖策略范围值
+     */
+    int getRateRange(String key);
+
+    /**
+     * 获取奖品ID
+     * @param key 策略ID
+     * @param rateRage 抽奖策略范围值
+     * @param i 随机值 (0,rateRage)
+     * @return 奖品ID
+     */
+    Integer getStrategyAwardAssemble(String  key, int i);
+
+    /**
+     * 查询策略规则
+     * @param strategyId 策略ID
+     * @param ruleModel  策略模型
+     * @return 策略规则实体
+     */
+    StrategyRuleEntity queryStrategyRule(Long strategyId, String ruleModel);
 }

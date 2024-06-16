@@ -15,23 +15,23 @@ public class Strategy {
     /**
      * 抽奖策略ID
      **/
-    private Long strategy_id;
+    private Long strategyId;
     /**
      * 抽奖策略描述
      **/
-    private String strategy_desc;
+    private String strategyDesc;
     /**
      * 规则模型，rule配置的模型同步到此表，便于使用
      **/
-    private String rule_models;
+    private String ruleModels;
     /**
      * 创建时间
      **/
-    private Date create_time;
+    private Date createTime;
     /**
      * 更新时间
      **/
-    private Date update_time;
+    private Date updateTime;
 
 
 }

@@ -1,17 +1,18 @@
 package com.tut.domain.strategy.service.armory;
 
 import com.tut.domain.strategy.model.StrategyAwardEntity;
+import com.tut.domain.strategy.model.StrategyEntity;
+import com.tut.domain.strategy.model.StrategyRuleEntity;
 import com.tut.domain.strategy.repository.IStrategyRepository;
+import com.tut.types.enums.ResponseCode;
+import com.tut.types.exception.AppException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zsj 【352326430@qq.com】
@@ -20,7 +21,7 @@ import java.util.List;
  */
 
 @Service
-public class StrategyArmory implements IStrategyArmory {
+public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatch {
 
     @Resource
     private IStrategyRepository repository;
@@ -29,7 +30,27 @@ public class StrategyArmory implements IStrategyArmory {
     public boolean assemblyStrategy(Long strategyId) {
         // 1. 查询策略配置
         List<StrategyAwardEntity> strategyAwardEntities = repository.queryAwardsByStrategyId(strategyId);
+        assembleLotteryStrategy(String.valueOf(strategyId), strategyAwardEntities);
 
+        // 2.查询策略权重
+        StrategyEntity strategyEntity = repository.queryStrategyEntityByStrategyId(strategyId);
+        String ruleWeight = strategyEntity.getRuleWeight();
+        if(ruleWeight == null) { return true;}
+        StrategyRuleEntity strategyRuleEntity = repository.queryStrategyRule(strategyId, ruleWeight);
+        if(strategyRuleEntity == null) { throw new AppException(ResponseCode.STRATEGY_RULE_WEIGHT_IS_NULL.getCode(),
+            ResponseCode.STRATEGY_RULE_WEIGHT_IS_NULL.getInfo());}
+        HashMap<String, List<Long>> ruleWeightValueMap = strategyRuleEntity.getRuleWeightValues();
+        Set<String> keys = ruleWeightValueMap.keySet();
+        for (String key:keys){
+            List<Long> ruleWeightValues = ruleWeightValueMap.get(key);
+            ArrayList<StrategyAwardEntity> strategyAwardEntitiesClone = new ArrayList<>(strategyAwardEntities);
+            strategyAwardEntitiesClone.removeIf(entity -> !ruleWeightValues.contains(entity.getAwardId()));
+            assembleLotteryStrategy(String.valueOf(strategyId).concat("_").concat(key), strategyAwardEntitiesClone);
+        }
+        return true;
+    }
+
+    private void assembleLotteryStrategy(String key, List<StrategyAwardEntity> strategyAwardEntities) {
         // 2. 获得最小概率值
         BigDecimal minAwardRate = strategyAwardEntities.stream()
                 .map(StrategyAwardEntity::getAwardRate)
@@ -62,13 +83,17 @@ public class StrategyArmory implements IStrategyArmory {
         for (int i = 0; i < strategyAwardSearchRateTables.size(); i++) {
             shuffledStrategyAwardSearchRateTable.put(i,strategyAwardSearchRateTables.get(i));
         }
-        repository.storeStrategyAwardSearchRateTable(strategyId, shuffledStrategyAwardSearchRateTable.size(), shuffledStrategyAwardSearchRateTable);
-
-        return true;
+        repository.storeStrategyAwardSearchRateTable(key, shuffledStrategyAwardSearchRateTable.size(), shuffledStrategyAwardSearchRateTable);
     }
 
     public Integer getRandomAwardId(Long strategyId) {
-        int rateRage = repository.getRateRange(strategyId);
-        return repository.getStrategyAwardAssemble(strategyId, rateRage, new SecureRandom().nextInt(rateRage));
+        String cacheKey = String.valueOf(strategyId);
+        int rateRage = repository.getRateRange(cacheKey);
+        return repository.getStrategyAwardAssemble(cacheKey, new SecureRandom().nextInt(rateRage));
+    }
+    public Integer getRandomAwardId(Long strategyId,String  key) {
+        String cacheKey = String.valueOf(strategyId).concat("_").concat(key);
+        int rateRage = repository.getRateRange(cacheKey);
+        return repository.getStrategyAwardAssemble(cacheKey, new SecureRandom().nextInt(rateRage));
     }
 }

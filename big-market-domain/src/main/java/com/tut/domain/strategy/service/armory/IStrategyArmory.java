@@ -7,8 +7,11 @@ package com.tut.domain.strategy.service.armory;
  */
 
 public interface IStrategyArmory {
+    /**
+     * 策略装配
+     * @param strategyId 策略ID
+     * @return boolean
+     */
     boolean assemblyStrategy(Long strategyId);
-
-    Integer getRandomAwardId(Long strategyId);
 
 }
