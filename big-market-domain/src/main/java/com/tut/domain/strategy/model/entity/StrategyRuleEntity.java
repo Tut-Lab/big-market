@@ -1,4 +1,4 @@
-package com.tut.domain.strategy.model;
+package com.tut.domain.strategy.model.entity;
 
 import com.tut.types.common.Constants;
 import lombok.AllArgsConstructor;

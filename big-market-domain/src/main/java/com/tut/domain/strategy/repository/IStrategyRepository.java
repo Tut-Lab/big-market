@@ -1,8 +1,8 @@
 package com.tut.domain.strategy.repository;
 
-import com.tut.domain.strategy.model.StrategyAwardEntity;
-import com.tut.domain.strategy.model.StrategyEntity;
-import com.tut.domain.strategy.model.StrategyRuleEntity;
+import com.tut.domain.strategy.model.entity.StrategyAwardEntity;
+import com.tut.domain.strategy.model.entity.StrategyEntity;
+import com.tut.domain.strategy.model.entity.StrategyRuleEntity;
 
 import java.util.LinkedHashMap;
 import java.util.List;

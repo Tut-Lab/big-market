@@ -1,8 +1,8 @@
 package com.tut.infrastructure.persistent.mapper;
 
-import com.tut.domain.strategy.model.StrategyAwardEntity;
-import com.tut.domain.strategy.model.StrategyEntity;
-import com.tut.domain.strategy.model.StrategyRuleEntity;
+import com.tut.domain.strategy.model.entity.StrategyAwardEntity;
+import com.tut.domain.strategy.model.entity.StrategyEntity;
+import com.tut.domain.strategy.model.entity.StrategyRuleEntity;
 import com.tut.infrastructure.persistent.po.Strategy;
 import com.tut.infrastructure.persistent.po.StrategyAward;
 import com.tut.infrastructure.persistent.po.StrategyRule;
