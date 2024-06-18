@@ -100,4 +100,17 @@ public class StrategyRepository implements IStrategyRepository {
         strategyRule = strategyRuleDao.queryStrategyRule(strategyRule);
         return StrategyMapper.INSTANCE.strategyRuleToStrategyRuleEntity(strategyRule);
     }
+
+    @Override
+    public String queryStrategyRuleValue(Long strategyId, Long awardId, String ruleModel) {
+        StrategyRule strategyRule = StrategyRule.builder()
+                        .strategyId(strategyId)
+                                .awardId(awardId)
+                                        .ruleModel(ruleModel)
+                                                .build();
+
+        strategyRule = strategyRuleDao.queryStrategyRule(strategyRule);
+
+        return strategyRule.getRuleValue();
+    }
 }

@@ -20,7 +20,7 @@ public class RaffleAwardEntity {
     /** 策略ID */
     private Long strategyId;
     /** 奖品ID */
-    private String awardId;
+    private Integer awardId;
     /** 奖品对接标识  - 每一个都是一个对应策略 */
     private String awardKey;
     /** 奖品配置信息 */

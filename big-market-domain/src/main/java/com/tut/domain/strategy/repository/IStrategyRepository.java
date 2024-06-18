@@ -60,4 +60,6 @@ public interface IStrategyRepository {
      * @return 策略规则实体
      */
     StrategyRuleEntity queryStrategyRule(Long strategyId, String ruleModel);
+
+    String queryStrategyRuleValue(Long strategyId, Long awardId, String ruleModel);
 }
