@@ -1,5 +1,6 @@
 package com.tut.domain.strategy.model.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**

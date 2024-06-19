@@ -13,7 +13,6 @@ import com.tut.types.enums.ResponseCode;
 import com.tut.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
 
 /**
  * @author zsj 【352326430@qq.com】
@@ -56,26 +55,16 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
                         .awardId(ruleActionEntity.getData().getAwardId())
                         .build();
             }else if(DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode().equals(ruleActionEntity.getRuleModel())){
+                // 权重根据返回的信息进行抽奖
+                Long strategyId1 = ruleActionEntity.getData().getStrategyId();
+                String ruleWeightValueKey = ruleActionEntity.getData().getRuleWeightValueKey();
+                Integer randomAwardId = strategyDispatch.getRandomAwardId(strategyId1, ruleWeightValueKey);
 
+                return  RaffleAwardEntity.builder()
+                        .awardId(randomAwardId)
+                        .build();
             }
         }
-
-//        if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(ruleActionEntity.getCode())) {
-//            if (DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(ruleActionEntity.getRuleModel())) {
-//                // 黑名单返回固定的奖品ID
-//                return RaffleAwardEntity.builder()
-//                        .awardId(ruleActionEntity.getData().getAwardId())
-//                        .build();
-//            } else if (DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode().equals(ruleActionEntity.getRuleModel())) {
-//                // 权重根据返回的信息进行抽奖
-//                RuleActionEntity.RaffleBeforeEntity raffleBeforeEntity = ruleActionEntity.getData();
-//                String ruleWeightValueKey = raffleBeforeEntity.getRuleWeightValueKey();
-//                Integer awardId = strategyDispatch.getRandomAwardId(strategyId, ruleWeightValueKey);
-//                return RaffleAwardEntity.builder()
-//                        .awardId(awardId)
-//                        .build();
-//            }
-//        }
 
         // 4. 默认抽奖流程
         Integer awardId = strategyDispatch.getRandomAwardId(strategyId);
