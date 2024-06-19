@@ -34,6 +34,24 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     protected RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> doCheckRaffleBeforeLogic(RaffleFactorEntity raffleFactorEntity, String... logics) {
         Map<String, ILogicFilter<RuleActionEntity.RaffleBeforeEntity>> logicFilterGroup = logicFactory.openLogicFilter();
 
+        // 白名单优先过滤
+        String ruleWhiteList = Arrays.stream(logics)
+                .filter(str -> str.equals(DefaultLogicFactory.LogicModel.RULE_WHITELIST.getCode()))
+                .findFirst()
+                .orElse(null);
+        if(StringUtils.isNotBlank(ruleWhiteList)){
+            ILogicFilter<RuleActionEntity.RaffleBeforeEntity> logicFilter = logicFilterGroup.get(DefaultLogicFactory.LogicModel.RULE_WHITELIST.getCode());
+            RuleMatterEntity ruleMatterEntity = RuleMatterEntity.builder()
+                    .strategyId(raffleFactorEntity.getStrategyId())
+                    .userId(raffleFactorEntity.getUserId())
+                    .ruleModel(DefaultLogicFactory.LogicModel.RULE_WHITELIST.getCode())
+                    .build();
+            RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> ruleActionEntity = logicFilter.filter(ruleMatterEntity);
+            if(!RuleLogicCheckTypeVO.ALLOW.getCode().equals(ruleActionEntity.getCode())){
+                return ruleActionEntity;
+            }
+        }
+
         // 黑名单优先过滤
         String ruleBlackList = Arrays.stream(logics)
                 .filter(str -> str.equals(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode()))
@@ -42,12 +60,11 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
 
         if(StringUtils.isNotBlank(ruleBlackList)){
             ILogicFilter<RuleActionEntity.RaffleBeforeEntity> logicFilter = logicFilterGroup.get(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode());
-            DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode();
-            RuleMatterEntity ruleMatterEntity = new RuleMatterEntity();
-            ruleMatterEntity.setUserId(raffleFactorEntity.getUserId());
-            ruleMatterEntity.setStrategyId(raffleFactorEntity.getStrategyId());
-            ruleMatterEntity.setAwardId(ruleMatterEntity.getAwardId());
-            ruleMatterEntity.setRuleModel(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode());
+            RuleMatterEntity ruleMatterEntity = RuleMatterEntity.builder()
+                    .userId(raffleFactorEntity.getUserId())
+                    .strategyId(raffleFactorEntity.getStrategyId())
+                    .ruleModel(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode())
+                    .build();
             RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> ruleActionEntity = logicFilter.filter(ruleMatterEntity);
             if (!RuleLogicCheckTypeVO.ALLOW.getCode().equals(ruleActionEntity.getCode())){
                 return ruleActionEntity;
@@ -55,15 +72,15 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
         }
         RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> ruleActionEntity = null;
         List<String> ruleList = Arrays.stream(logics)
-                .filter(str -> !str.equals(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode()))
+                .filter(str -> !str.equals(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode()) || !str.equals(DefaultLogicFactory.LogicModel.RULE_WHITELIST.getCode()) )
                 .collect(Collectors.toList());
         for (String ruleModel : ruleList) {
             ILogicFilter<RuleActionEntity.RaffleBeforeEntity> logicFilter = logicFilterGroup.get(ruleModel);
-            RuleMatterEntity ruleMatterEntity = new RuleMatterEntity();
-            ruleMatterEntity.setUserId(raffleFactorEntity.getUserId());
-            ruleMatterEntity.setStrategyId(raffleFactorEntity.getStrategyId());
-            ruleMatterEntity.setAwardId(ruleMatterEntity.getAwardId());
-            ruleMatterEntity.setRuleModel(DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode());
+            RuleMatterEntity ruleMatterEntity = RuleMatterEntity.builder()
+                    .userId(raffleFactorEntity.getUserId())
+                    .strategyId(raffleFactorEntity.getStrategyId())
+                    .ruleModel(DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode())
+                    .build();
             ruleActionEntity = logicFilter.filter(ruleMatterEntity);
             // 非放行结果则规则过滤
             log.info("抽奖前规则过滤 userId: {} ruleModel: {} code:{} info:{}",raffleFactorEntity.getUserId(),ruleModel,ruleActionEntity.getCode(),ruleActionEntity.getInfo());

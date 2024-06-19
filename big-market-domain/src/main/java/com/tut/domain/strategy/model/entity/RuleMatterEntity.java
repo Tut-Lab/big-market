@@ -10,6 +10,7 @@ import lombok.Data;
  */
 
 @Data
+@Builder
 public class RuleMatterEntity {
 
     /** 用户ID */

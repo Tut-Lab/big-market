@@ -49,7 +49,12 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
         RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> ruleActionEntity = this.doCheckRaffleBeforeLogic(RaffleFactorEntity.builder().userId(userId).strategyId(strategyId).build(), strategy.ruleModels());
 
         if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(ruleActionEntity.getCode())){
-            if(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(ruleActionEntity.getRuleModel())){
+            if (DefaultLogicFactory.LogicModel.RULE_WHITELIST.getCode().equals(ruleActionEntity.getRuleModel())){
+                return RaffleAwardEntity.builder()
+                        .awardId(ruleActionEntity.getData().getAwardId())
+                        .build();
+
+            } else if(DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(ruleActionEntity.getRuleModel())){
                 // 黑名单返回固定的奖品ID
                 return RaffleAwardEntity.builder()
                         .awardId(ruleActionEntity.getData().getAwardId())

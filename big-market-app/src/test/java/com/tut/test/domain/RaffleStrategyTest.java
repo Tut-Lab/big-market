@@ -33,7 +33,7 @@ public class RaffleStrategyTest {
     public void test_performRaffle(){
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
                 .strategyId(100001L)
-                .userId("zheng")
+                .userId("zheng1")
                 .build();
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
         log.info("请求参数：{}", JSON.toJSONString(raffleFactorEntity));
@@ -45,6 +45,17 @@ public class RaffleStrategyTest {
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
                 .strategyId(100001L)
                 .userId("user003") // 黑名单user001 user002 user003
+                .build();
+        RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
+        log.info("请求参数：{}", JSON.toJSONString(raffleFactorEntity));
+        log.info("测试结果：{}", JSON.toJSONString(raffleAwardEntity));
+
+    }
+    @Test
+    public void test_performRaffle_whitelist(){
+        RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
+                .strategyId(100001L)
+                .userId("zheng") // 白名单zheng luo
                 .build();
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
         log.info("请求参数：{}", JSON.toJSONString(raffleFactorEntity));
