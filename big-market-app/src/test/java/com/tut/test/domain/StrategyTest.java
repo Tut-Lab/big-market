@@ -28,8 +28,7 @@ public class StrategyTest {
 
     @Test
     public void test_assemblyStrategy(){
-        boolean success = strategyArmory.assemblyStrategy(100001L);
-        log.info("测试结果:{}",success);
+        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100001L));
     }
 
     @Test

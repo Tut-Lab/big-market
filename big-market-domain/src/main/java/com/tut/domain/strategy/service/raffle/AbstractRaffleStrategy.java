@@ -5,6 +5,7 @@ import com.tut.domain.strategy.model.entity.RaffleFactorEntity;
 import com.tut.domain.strategy.model.entity.RuleActionEntity;
 import com.tut.domain.strategy.model.entity.StrategyEntity;
 import com.tut.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
+import com.tut.domain.strategy.model.valobj.StrategyRuleModelVO;
 import com.tut.domain.strategy.repository.IStrategyRepository;
 import com.tut.domain.strategy.service.IRaffleStrategy;
 import com.tut.domain.strategy.service.armory.IStrategyDispatch;
@@ -74,10 +75,28 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
         // 4. 默认抽奖流程
         Integer awardId = strategyDispatch.getRandomAwardId(strategyId);
 
+        // 5. 查询奖品规则【抽奖中（拿到奖品ID时，过滤规则）、抽奖后（扣减完库存后过滤，抽奖中拦截和无库存则走兜底）】
+        StrategyRuleModelVO strategyRuleModelVO = repository.queryStrategyAwardRuleModel(strategyId,awardId);
+
+        // 6. 抽奖中 - 规则过滤
+        RuleActionEntity<RuleActionEntity.RaffleCenterEntity> raffleCenterEntityRuleActionEntity = this.doCheckRaffleCenterLogic(RaffleFactorEntity.builder()
+                        .userId(userId)
+                        .strategyId(strategyId)
+                        .awardId(awardId.longValue())
+                        .build(), strategyRuleModelVO.raffleCenterRuleModelList()
+        );
+        if(RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(raffleCenterEntityRuleActionEntity.getCode())){
+            log.info("[临时日志]中奖中规则拦截，通过抽奖后规则rule_luck_award走兜底。");
+            return RaffleAwardEntity.builder()
+                    .awardDesc("中奖中规则拦截，通过抽奖后规则rule_luck_award走兜底。")
+                    .build();
+        }
+
         return RaffleAwardEntity.builder()
                 .awardId(awardId)
                 .build();
     }
 
     protected abstract RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> doCheckRaffleBeforeLogic(RaffleFactorEntity raffleFactorEntity, String... logics);
+    protected abstract RuleActionEntity<RuleActionEntity.RaffleCenterEntity> doCheckRaffleCenterLogic(RaffleFactorEntity raffleFactorEntity, String... logics);
 }
