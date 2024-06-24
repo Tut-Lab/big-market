@@ -5,8 +5,8 @@ import com.tut.domain.strategy.model.entity.RaffleAwardEntity;
 import com.tut.domain.strategy.model.entity.RaffleFactorEntity;
 import com.tut.domain.strategy.service.IRaffleStrategy;
 import com.tut.domain.strategy.service.armory.IStrategyArmory;
-import com.tut.domain.strategy.service.rule.impl.RuleLockLogicFilter;
-import com.tut.domain.strategy.service.rule.impl.RuleWeightLogicFilter;
+import com.tut.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
+import com.tut.domain.strategy.service.rule.filter.impl.RuleWeightLogicFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class RaffleStrategyTest {
     @Test
     public void test_performRaffle(){
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
-                .strategyId(100001L)
+                .strategyId(100003L)
                 .userId("zheng")
                 .build();
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
@@ -54,7 +54,7 @@ public class RaffleStrategyTest {
     @Test
     public void test_performRaffle_blacklist(){
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
-                .strategyId(100001L)
+                .strategyId(100003L)
                 .userId("user003") // 黑名单user001 user002 user003
                 .build();
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
@@ -65,7 +65,7 @@ public class RaffleStrategyTest {
     @Test
     public void test_performRaffle_whitelist(){
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
-                .strategyId(100001L)
+                .strategyId(100003L)
                 .userId("zheng") // 白名单zheng luo
                 .build();
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);

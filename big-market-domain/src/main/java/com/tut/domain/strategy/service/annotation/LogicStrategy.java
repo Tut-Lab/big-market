@@ -1,6 +1,6 @@
 package com.tut.domain.strategy.service.annotation;
 
-import com.tut.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.tut.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

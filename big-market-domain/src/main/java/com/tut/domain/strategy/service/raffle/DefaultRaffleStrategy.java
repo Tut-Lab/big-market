@@ -5,9 +5,11 @@ import com.tut.domain.strategy.model.entity.RuleActionEntity;
 import com.tut.domain.strategy.model.entity.RuleMatterEntity;
 import com.tut.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.tut.domain.strategy.repository.IStrategyRepository;
+import com.tut.domain.strategy.service.AbstractRaffleStrategy;
 import com.tut.domain.strategy.service.armory.IStrategyDispatch;
-import com.tut.domain.strategy.service.rule.ILogicFilter;
-import com.tut.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.tut.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
+import com.tut.domain.strategy.service.rule.filter.ILogicFilter;
+import com.tut.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,9 +28,10 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     @Resource
     private DefaultLogicFactory logicFactory;
 
-    public DefaultRaffleStrategy(IStrategyRepository repository, IStrategyDispatch strategyDispatch) {
-        super(repository, strategyDispatch);
+    public DefaultRaffleStrategy(IStrategyRepository repository, IStrategyDispatch strategyDispatch, DefaultChainFactory defaultChainFactory) {
+        super(repository, strategyDispatch, defaultChainFactory);
     }
+
 
     @Override
     protected RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> doCheckRaffleBeforeLogic(RaffleFactorEntity raffleFactorEntity, String... logics) {

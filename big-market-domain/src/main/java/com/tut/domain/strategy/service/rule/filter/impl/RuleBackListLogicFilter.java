@@ -1,12 +1,12 @@
-package com.tut.domain.strategy.service.rule.impl;
+package com.tut.domain.strategy.service.rule.filter.impl;
 
 import com.tut.domain.strategy.model.entity.RuleActionEntity;
 import com.tut.domain.strategy.model.entity.RuleMatterEntity;
 import com.tut.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.tut.domain.strategy.repository.IStrategyRepository;
 import com.tut.domain.strategy.service.annotation.LogicStrategy;
-import com.tut.domain.strategy.service.rule.ILogicFilter;
-import com.tut.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.tut.domain.strategy.service.rule.filter.ILogicFilter;
+import com.tut.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import com.tut.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
