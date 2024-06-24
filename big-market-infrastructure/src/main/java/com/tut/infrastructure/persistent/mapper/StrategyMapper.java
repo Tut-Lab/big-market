@@ -7,6 +7,9 @@ import com.tut.infrastructure.persistent.po.Strategy;
 import com.tut.infrastructure.persistent.po.StrategyAward;
 import com.tut.infrastructure.persistent.po.StrategyRule;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.NullValueCheckStrategy;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -15,7 +18,7 @@ import org.mapstruct.factory.Mappers;
  * @create 2024/6/15 22:22
  */
 
-@Mapper
+@Mapper(nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION)
 public interface StrategyMapper {
 
     StrategyMapper INSTANCE = Mappers.getMapper( StrategyMapper.class );
