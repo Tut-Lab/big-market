@@ -5,8 +5,8 @@ import com.tut.domain.strategy.model.entity.RaffleAwardEntity;
 import com.tut.domain.strategy.model.entity.RaffleFactorEntity;
 import com.tut.domain.strategy.service.IRaffleStrategy;
 import com.tut.domain.strategy.service.armory.IStrategyArmory;
+import com.tut.domain.strategy.service.rule.chain.impl.RuleWeightLogicChain;
 import com.tut.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
-import com.tut.domain.strategy.service.rule.filter.impl.RuleWeightLogicFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +28,7 @@ public class RaffleStrategyTest {
     private IRaffleStrategy raffleStrategy;
 
     @Resource
-    private RuleWeightLogicFilter ruleWeightLogicFilter;
-
+    private RuleWeightLogicChain ruleWeightLogicChain;
     @Resource
     private RuleLockLogicFilter ruleLockLogicFilter;
     @Before
@@ -37,7 +36,7 @@ public class RaffleStrategyTest {
         log.info("测试结果:{}",strategyArmory.assemblyStrategy(100001L));
         log.info("测试结果:{}",strategyArmory.assemblyStrategy(100002L));
         log.info("测试结果:{}",strategyArmory.assemblyStrategy(100003L));
-        ReflectionTestUtils.setField(ruleWeightLogicFilter,"userScore",5000L);
+        ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5000L);
         ReflectionTestUtils.setField(ruleLockLogicFilter,"user_count",10L);
     }
     @Test
