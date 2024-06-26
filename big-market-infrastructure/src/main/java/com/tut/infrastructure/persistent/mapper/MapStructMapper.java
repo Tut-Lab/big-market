@@ -3,13 +3,11 @@ package com.tut.infrastructure.persistent.mapper;
 import com.tut.domain.strategy.model.entity.StrategyAwardEntity;
 import com.tut.domain.strategy.model.entity.StrategyEntity;
 import com.tut.domain.strategy.model.entity.StrategyRuleEntity;
-import com.tut.infrastructure.persistent.po.Strategy;
-import com.tut.infrastructure.persistent.po.StrategyAward;
-import com.tut.infrastructure.persistent.po.StrategyRule;
+import com.tut.domain.strategy.model.valobj.RuleTreeNodeLineVO;
+import com.tut.domain.strategy.model.valobj.RuleTreeVO;
+import com.tut.infrastructure.persistent.po.*;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -19,9 +17,9 @@ import org.mapstruct.factory.Mappers;
  */
 
 @Mapper(nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION)
-public interface StrategyMapper {
+public interface MapStructMapper {
 
-    StrategyMapper INSTANCE = Mappers.getMapper( StrategyMapper.class );
+    MapStructMapper INSTANCE = Mappers.getMapper( MapStructMapper.class );
 
 
     StrategyAwardEntity StrategyAwardToStrategyAwardEntity(StrategyAward strategyAward);
@@ -29,4 +27,8 @@ public interface StrategyMapper {
     StrategyEntity strategyToStrategyENtity(Strategy strategy);
 
     StrategyRuleEntity strategyRuleToStrategyRuleEntity(StrategyRule strategyRule);
+
+    RuleTreeVO RuleTreeTORuleTreeVO(RuleTree ruleTree);
+
+    RuleTreeNodeLineVO  RuleTreeNodeLineVOTORuleTreeNodeLine(RuleTreeNodeLine ruleTreeNodeLine);
 }

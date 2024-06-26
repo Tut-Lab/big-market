@@ -3,6 +3,7 @@ package com.tut.domain.strategy.repository;
 import com.tut.domain.strategy.model.entity.StrategyAwardEntity;
 import com.tut.domain.strategy.model.entity.StrategyEntity;
 import com.tut.domain.strategy.model.entity.StrategyRuleEntity;
+import com.tut.domain.strategy.model.valobj.RuleTreeVO;
 import com.tut.domain.strategy.model.valobj.StrategyRuleModelVO;
 
 import java.util.LinkedHashMap;
@@ -65,4 +66,7 @@ public interface IStrategyRepository {
     String queryStrategyRuleValue(Long strategyId, Long awardId, String ruleModel);
     String queryStrategyRuleValue(Long strategyId, String ruleModel);
     StrategyRuleModelVO queryStrategyAwardRuleModel(Long strategyId, Integer awardId);
+
+
+    RuleTreeVO queryRuleTreeVOByTreeId(String treeId);
 }

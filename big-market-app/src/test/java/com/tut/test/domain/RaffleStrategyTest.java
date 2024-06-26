@@ -6,7 +6,6 @@ import com.tut.domain.strategy.model.entity.RaffleFactorEntity;
 import com.tut.domain.strategy.service.IRaffleStrategy;
 import com.tut.domain.strategy.service.armory.IStrategyArmory;
 import com.tut.domain.strategy.service.rule.chain.impl.RuleWeightLogicChain;
-import com.tut.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,20 +28,20 @@ public class RaffleStrategyTest {
 
     @Resource
     private RuleWeightLogicChain ruleWeightLogicChain;
-    @Resource
-    private RuleLockLogicFilter ruleLockLogicFilter;
+
     @Before
     public void setUp(){
         log.info("测试结果:{}",strategyArmory.assemblyStrategy(100001L));
-        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100002L));
-        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100003L));
+//        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100002L));
+//        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100003L));
+        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100006L));
         ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5000L);
-        ReflectionTestUtils.setField(ruleLockLogicFilter,"user_count",10L);
+
     }
     @Test
     public void test_performRaffle(){
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
-                .strategyId(100003L)
+                .strategyId(100006L)
                 .userId("zheng")
                 .build();
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
