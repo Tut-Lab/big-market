@@ -1,6 +1,7 @@
 package com.tut.domain.strategy.service.raffle;
 
 import com.tut.domain.strategy.model.valobj.RuleTreeVO;
+import com.tut.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import com.tut.domain.strategy.model.valobj.StrategyRuleModelVO;
 import com.tut.domain.strategy.repository.IStrategyRepository;
 import com.tut.domain.strategy.service.AbstractRaffleStrategy;
@@ -30,15 +31,24 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     @Override
     public DefaultTreeFactory.StrategyAwardVO raffleLogicTree(String userId, Long strategyId, Integer awardId) {
         StrategyRuleModelVO strategyAwardRuleModelVO = repository.queryStrategyAwardRuleModel(strategyId, awardId);
-        if(null != strategyAwardRuleModelVO){
+        if(null == strategyAwardRuleModelVO){
             return DefaultTreeFactory.StrategyAwardVO.builder().awardId(awardId).build();
         }
         RuleTreeVO ruleTreeVO = repository.queryRuleTreeVOByTreeId(strategyAwardRuleModelVO.getRuleModel());
-        if(null!= ruleTreeVO){
+        if(null == ruleTreeVO){
             throw new RuntimeException("存在抽奖策略配置的规则模型 Key，未在库表 rule_tree、rule_tree_node、rule_tree_line 配置对应的规则树信息 " + strategyAwardRuleModelVO.getRuleModel());
         }
         IDecisionTreeEngine treeEngine = defaultTreeFactory.openLogicTree(ruleTreeVO);
         return treeEngine.process(userId,strategyId,awardId);
     }
 
+    @Override
+    public StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException {
+        return repository.takeQueueValue();
+    }
+
+    @Override
+    public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
+        repository.updateStrategyAwardStock(strategyId,awardId);
+    }
 }

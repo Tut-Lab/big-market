@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component("default")
 public abstract class AbstractLogicChain implements ILogicChain{
 
     private ILogicChain next;
