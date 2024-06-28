@@ -23,7 +23,7 @@ public interface IStrategyRepository {
      * @param strategyId 策略ID
      * @return 策略奖品列表
      */
-    List<StrategyAwardEntity>  queryAwardsByStrategyId(Long strategyId);
+    List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId);
 
     /**
      * 获取策略实体
@@ -74,7 +74,7 @@ public interface IStrategyRepository {
     /**
      * 缓存奖品库存
      * @param cacheKey key
-     * @param awardCount 库存值
+     * @param awardCountSurplus 库存值
      */
     void cacheStrategyAwardCountSurplus(String cacheKey, Integer awardCountSurplus);
 
@@ -85,4 +85,12 @@ public interface IStrategyRepository {
     StrategyAwardStockKeyVO takeQueueValue();
 
     void updateStrategyAwardStock(Long strategyId, Integer awardId);
+    /**
+     * 根据策略ID+奖品ID的唯一值组合，查询奖品信息
+     *
+     * @param strategyId 策略ID
+     * @param awardId    奖品ID
+     * @return 奖品信息
+     */
+    StrategyAwardEntity queryStrategyAwardEntity(Long strategyId, Integer awardId);
 }

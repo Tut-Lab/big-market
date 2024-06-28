@@ -30,7 +30,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
     @Override
     public boolean assemblyStrategy(Long strategyId) {
         // 1. 查询策略配置
-        List<StrategyAwardEntity> strategyAwardEntities = repository.queryAwardsByStrategyId(strategyId);
+        List<StrategyAwardEntity> strategyAwardEntities = repository.queryStrategyAwardList(strategyId);
 
         // 2.缓存奖品库存【用于decr扣库存使用】
         for (StrategyAwardEntity strategyAwardEntity : strategyAwardEntities) {

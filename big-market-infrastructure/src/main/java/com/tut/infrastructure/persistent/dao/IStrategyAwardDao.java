@@ -18,4 +18,6 @@ public interface IStrategyAwardDao {
     Integer queryStrategyAwardCountSurplus(Long strategyId, Integer awardId);
 
     void updateStrategyAwardStock(StrategyAward strategyAward);
+
+    StrategyAward queryStrategyAward(StrategyAward strategyAwardReq);
 }
