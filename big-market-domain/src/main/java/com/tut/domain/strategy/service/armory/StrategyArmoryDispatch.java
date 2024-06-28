@@ -35,8 +35,8 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         // 2.缓存奖品库存【用于decr扣库存使用】
         for (StrategyAwardEntity strategyAwardEntity : strategyAwardEntities) {
             Long awardId = strategyAwardEntity.getAwardId();
-            Integer awardCount = strategyAwardEntity.getAwardCount();
-            cacheStrategyAwardCountSurplus(strategyId,awardId,awardCount);
+            Integer awardCountSurplus = strategyAwardEntity.getAwardCountSurplus();
+            cacheStrategyAwardCountSurplus(strategyId,awardId,awardCountSurplus);
         }
 
         // 3.1 默认装配配置【全量抽奖概率】
@@ -60,9 +60,9 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         return true;
     }
 
-    private void cacheStrategyAwardCountSurplus(Long strategyId,Long awardId, Integer awardCount) {
+    private void cacheStrategyAwardCountSurplus(Long strategyId,Long awardId, Integer awardCountSurplus) {
         String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY + strategyId + Constants.UNDERLINE + awardId ;
-        repository.cacheStrategyAwardCountSurplus(cacheKey,awardCount);
+        repository.cacheStrategyAwardCountSurplus(cacheKey,awardCountSurplus);
     }
 
     private void assembleLotteryStrategy(String key, List<StrategyAwardEntity> strategyAwardEntities) {

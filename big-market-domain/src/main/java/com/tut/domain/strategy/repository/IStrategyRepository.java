@@ -76,7 +76,7 @@ public interface IStrategyRepository {
      * @param cacheKey key
      * @param awardCount 库存值
      */
-    void cacheStrategyAwardCountSurplus(String cacheKey, Integer awardCount);
+    void cacheStrategyAwardCountSurplus(String cacheKey, Integer awardCountSurplus);
 
     Boolean subtractionAwardStock(String cacheKey);
 
