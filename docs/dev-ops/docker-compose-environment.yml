@@ -60,8 +60,8 @@ services:
     ports:
       - 16379:6379
     volumes:
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
-    command: redis-server /usr/local/etc/redis/redis.conf
+      - ./redis/redis.conf:/usr/redis/redis.conf
+    command: redis-server /usr/redis/redis.conf
     networks:
       - my-network
     healthcheck:
