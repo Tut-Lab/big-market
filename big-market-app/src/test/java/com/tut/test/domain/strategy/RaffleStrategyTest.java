@@ -1,4 +1,4 @@
-package com.tut.test.domain;
+package com.tut.test.domain.strategy;
 
 import com.alibaba.fastjson.JSON;
 import com.tut.domain.strategy.model.entity.RaffleAwardEntity;

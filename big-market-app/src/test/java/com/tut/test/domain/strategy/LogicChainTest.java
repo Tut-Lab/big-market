@@ -1,4 +1,4 @@
-package com.tut.test.domain;
+package com.tut.test.domain.strategy;
 
 import com.tut.domain.strategy.service.armory.IStrategyArmory;
 import com.tut.domain.strategy.service.rule.chain.ILogicChain;

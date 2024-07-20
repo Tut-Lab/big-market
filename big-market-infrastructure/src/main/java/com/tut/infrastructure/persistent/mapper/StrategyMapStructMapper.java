@@ -17,9 +17,9 @@ import org.mapstruct.factory.Mappers;
  */
 
 @Mapper(nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION)
-public interface MapStructMapper {
+public interface StrategyMapStructMapper {
 
-    MapStructMapper INSTANCE = Mappers.getMapper( MapStructMapper.class );
+    StrategyMapStructMapper INSTANCE = Mappers.getMapper( StrategyMapStructMapper.class );
 
 
     StrategyAwardEntity StrategyAwardToStrategyAwardEntity(StrategyAward strategyAward);

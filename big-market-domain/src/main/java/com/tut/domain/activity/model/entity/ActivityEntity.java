@@ -1,22 +1,23 @@
-package com.tut.infrastructure.persistent.po;
+package com.tut.domain.activity.model.entity;
 
+import com.tut.domain.activity.model.valobj.ActivityStateVO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @description 抽奖活动表
- * @author zsj
- * @date 2024-07-20
+ * @author Fuzhengwei bugstack.cn @小傅哥
+ * @description 活动实体对象
+ * @create 2024-03-16 11:15
  */
 @Data
-public class RaffleActivity {
-
-    /**
-     * 自增ID
-     */
-    private Long id;
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ActivityEntity {
 
     /**
      * 活动ID
@@ -43,6 +44,10 @@ public class RaffleActivity {
      */
     private Date endDateTime;
 
+    /**
+     * 活动参与次数配置
+     */
+    private Long activityCountId;
 
     /**
      * 抽奖策略ID
@@ -52,17 +57,6 @@ public class RaffleActivity {
     /**
      * 活动状态
      */
-    private String state;
+    private ActivityStateVO state;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    public RaffleActivity() {}
 }

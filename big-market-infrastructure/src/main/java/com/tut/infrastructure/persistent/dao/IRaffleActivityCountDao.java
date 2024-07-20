@@ -1,6 +1,9 @@
 package com.tut.infrastructure.persistent.dao;
 
+import com.tut.infrastructure.persistent.po.RaffleActivityCount;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
@@ -9,4 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface IRaffleActivityCountDao {
+    RaffleActivityCount queryRaffleActivityCountByActivityCountId(Long activityCountId);
 }

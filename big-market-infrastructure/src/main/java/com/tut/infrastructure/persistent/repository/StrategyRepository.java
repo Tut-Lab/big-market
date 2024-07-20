@@ -6,7 +6,7 @@ import com.tut.domain.strategy.model.entity.StrategyRuleEntity;
 import com.tut.domain.strategy.model.valobj.*;
 import com.tut.domain.strategy.repository.IStrategyRepository;
 import com.tut.infrastructure.persistent.dao.*;
-import com.tut.infrastructure.persistent.mapper.MapStructMapper;
+import com.tut.infrastructure.persistent.mapper.StrategyMapStructMapper;
 import com.tut.infrastructure.persistent.po.*;
 import com.tut.infrastructure.persistent.redis.IRedisService;
 import com.tut.types.common.Constants;
@@ -63,7 +63,7 @@ public class StrategyRepository implements IStrategyRepository {
         List<StrategyAward> strategyAwards = strategyAwardDao.queryStrategyAwardListByStrategyId(strategyId);
         strategyAwardEntities = new ArrayList<>(strategyAwards.size());
         for (StrategyAward strategyAward : strategyAwards) {
-            StrategyAwardEntity strategyAwardEntity = MapStructMapper.INSTANCE.StrategyAwardToStrategyAwardEntity(strategyAward);
+            StrategyAwardEntity strategyAwardEntity = StrategyMapStructMapper.INSTANCE.StrategyAwardToStrategyAwardEntity(strategyAward);
             strategyAwardEntities.add(strategyAwardEntity);
         }
         // 存入缓存
@@ -78,7 +78,7 @@ public class StrategyRepository implements IStrategyRepository {
         if (strategyEntities != null) return strategyEntities;
 
         Strategy strategy = strategyDao.queryByStrategyId(strategyId);
-        strategyEntities = MapStructMapper.INSTANCE.strategyToStrategyENtity(strategy);
+        strategyEntities = StrategyMapStructMapper.INSTANCE.strategyToStrategyENtity(strategy);
         redisService.setValue(cacheKey, strategyEntities);
         return strategyEntities;
     }
@@ -114,7 +114,7 @@ public class StrategyRepository implements IStrategyRepository {
                                         .build();
 
         strategyRule = strategyRuleDao.queryStrategyRule(strategyRule);
-        return MapStructMapper.INSTANCE.strategyRuleToStrategyRuleEntity(strategyRule);
+        return StrategyMapStructMapper.INSTANCE.strategyRuleToStrategyRuleEntity(strategyRule);
     }
 
     @Override
