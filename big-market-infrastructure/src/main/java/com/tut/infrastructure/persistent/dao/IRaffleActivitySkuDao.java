@@ -14,4 +14,8 @@ import java.util.List;
 @Mapper
 public interface IRaffleActivitySkuDao {
     RaffleActivitySku  queryRaffleSku(Long sku);
+
+    void updateActivitySkuStock(Long sku);
+
+    void clearActivitySkuStock(Long sku);
 }

@@ -59,4 +59,11 @@ public class ActivityEntity {
      */
     private ActivityStateVO state;
 
+    public boolean validActivityDate(Date date){
+        if (date.before(beginDateTime) || date.after(endDateTime)) {
+            return false;
+        }
+        return true;
+    }
+
 }
