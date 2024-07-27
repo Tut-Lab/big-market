@@ -15,6 +15,7 @@ import java.util.List;
 public interface IRaffleActivitySkuDao {
     RaffleActivitySku  queryRaffleSku(Long sku);
 
+    List<RaffleActivitySku> queryRaffleSkuListByActivityId(Long activityId);
     void updateActivitySkuStock(Long sku);
 
     void clearActivitySkuStock(Long sku);

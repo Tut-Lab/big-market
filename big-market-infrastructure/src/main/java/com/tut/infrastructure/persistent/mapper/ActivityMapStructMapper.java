@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @author zsj 【352326430@qq.com】
  * @description
@@ -19,6 +21,7 @@ public interface ActivityMapStructMapper {
     
     ActivitySkuEntity ActivitySkuEntityToRaffleActivitySku(RaffleActivitySku raffleActivitySku);
 
+    List<ActivitySkuEntity> ActivitySkuEntityListToRaffleActivitySkuList(List<RaffleActivitySku> raffleActivitySkuList);
     ActivityEntity RaffleActivityToActivityEntity(RaffleActivity raffleActivity);
 
     ActivityCountEntity RaffleActivityCountToActivityCountEntity(RaffleActivityCount raffleActivityCounts);

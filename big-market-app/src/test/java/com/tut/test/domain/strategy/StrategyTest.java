@@ -2,7 +2,6 @@ package com.tut.test.domain.strategy;
 
 import com.tut.domain.strategy.service.armory.IStrategyArmory;
 import com.tut.domain.strategy.service.armory.IStrategyDispatch;
-import io.reactivex.rxjava3.core.Single;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +27,7 @@ public class StrategyTest {
 
     @Test
     public void test_assemblyStrategy(){
-        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100001L));
+        log.info("测试结果:{}",strategyArmory.assembleLotteryStrategy(100001L));
     }
 
     @Test

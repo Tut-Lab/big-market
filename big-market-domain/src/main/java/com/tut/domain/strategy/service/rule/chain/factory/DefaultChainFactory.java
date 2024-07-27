@@ -46,7 +46,9 @@ public class DefaultChainFactory {
     public static class StrategyAwardVO {
         /** 抽奖奖品ID - 内部流转使用 */
         private Integer awardId;
-        /**  */
+        /**
+         * 抽奖类型；黑名单抽奖、权重规则、默认抽奖
+         */
         private String logicModel;
     }
 

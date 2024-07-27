@@ -24,6 +24,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -72,6 +73,12 @@ public class ActivityRepository implements IActivityRepository {
     public ActivitySkuEntity queryActivitySku(Long sku) {
         RaffleActivitySku raffleActivitySku = raffleActivitySkuDao.queryRaffleSku(sku);
         return ActivityMapStructMapper.INSTANCE.ActivitySkuEntityToRaffleActivitySku(raffleActivitySku);
+    }
+
+    @Override
+    public List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId) {
+        List<RaffleActivitySku> raffleActivitySkuList = raffleActivitySkuDao.queryRaffleSkuListByActivityId(activityId);
+        return ActivityMapStructMapper.INSTANCE.ActivitySkuEntityListToRaffleActivitySkuList(raffleActivitySkuList);
     }
 
     @Override

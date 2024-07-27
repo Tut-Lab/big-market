@@ -2,7 +2,11 @@ package com.tut.domain.activity.service;
 
 import com.tut.domain.activity.model.entity.PartakeRaffleActivityEntity;
 import com.tut.domain.activity.model.entity.UserRaffleOrderEntity;
-
+/**
+ * @author Fuzhengwei bugstack.cn @小傅哥
+ * @description 抽奖活动参与服务
+ * @create 2024-04-04 19:50
+ */
 public interface IRaffleActivityAccountPartakeService {
     /**
      * 创建抽奖单；用户参与抽奖活动，扣减活动账户库存，产生抽奖单。如存在未被使用的抽奖单则直接返回已存在的抽奖单。
@@ -11,4 +15,6 @@ public interface IRaffleActivityAccountPartakeService {
      * @return 用户抽奖订单实体对象
      */
     UserRaffleOrderEntity createOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
+
+    UserRaffleOrderEntity createOrder(String userId, Long activityId);
 }

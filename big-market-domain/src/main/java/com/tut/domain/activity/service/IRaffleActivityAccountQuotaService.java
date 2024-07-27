@@ -6,7 +6,7 @@ import com.tut.domain.activity.model.entity.SkuRechargeEntity;
 
 /**
  * @Author zsj
- * @description 抽奖活动接口
+ * @description 抽奖活动账户额度服务
  * @create 2024-07-29 12:39
  */
 public interface IRaffleActivityAccountQuotaService {

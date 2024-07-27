@@ -6,10 +6,11 @@ import com.tut.domain.activity.model.entity.*;
 import com.tut.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 import java.util.Date;
+import java.util.List;
 
 public interface IActivityRepository {
     ActivitySkuEntity queryActivitySku(Long sku);
-
+    List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
     ActivityEntity queryRaffleActivityByActivityId(Long activityId);
 
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);

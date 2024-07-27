@@ -2,8 +2,8 @@ package com.tut.trigger.api;
 
 import com.tut.trigger.api.dto.RaffleAwardListRequestDTO;
 import com.tut.trigger.api.dto.RaffleAwardListResponseDTO;
-import com.tut.trigger.api.dto.RaffleRequestDTO;
-import com.tut.trigger.api.dto.RaffleResponseDTO;
+import com.tut.trigger.api.dto.RaffleStrategyRequestDTO;
+import com.tut.trigger.api.dto.RaffleStrategyResponseDTO;
 import com.tut.types.model.Response;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @description 抽奖服务接口
  * @create 2024/6/28
  */
-public interface IRaffleService {
+public interface IRaffleStrategyService {
 
     /**
      * 策略装配接口
@@ -35,5 +35,5 @@ public interface IRaffleService {
      * @param request 请求参数
      * @return 抽奖结果
      */
-    Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO request);
+    Response<RaffleStrategyResponseDTO> randomRaffle(RaffleStrategyRequestDTO request);
 }

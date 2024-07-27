@@ -62,7 +62,15 @@ public abstract class AbstractRaffleActivityAccountPartakeService implements IRa
         log.info("创建活动抽奖单完成 userId:{} activityId:{} orderId:{}", userId, activityId, userRaffleOrder.getOrderId());
 
         // 7. 返回订单信息
-        return  userRaffleOrderEntity;
+        return  userRaffleOrder;
+    }
+
+    @Override
+    public UserRaffleOrderEntity createOrder(String userId, Long activityId) {
+        PartakeRaffleActivityEntity partakeRaffleActivityEntity = new PartakeRaffleActivityEntity();
+        partakeRaffleActivityEntity.setUserId(userId);
+        partakeRaffleActivityEntity.setActivityId(activityId);
+        return createOrder(partakeRaffleActivityEntity);
     }
 
     protected abstract UserRaffleOrderEntity buildUserRaffleOrder(String userId, Long activityId, Date currentDate);

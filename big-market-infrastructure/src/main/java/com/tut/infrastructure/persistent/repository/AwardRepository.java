@@ -9,6 +9,7 @@ import com.tut.domain.award.repository.IAwardRepository;
 import com.tut.infrastructure.event.EventPublisher;
 import com.tut.infrastructure.persistent.dao.ITaskDao;
 import com.tut.infrastructure.persistent.dao.IUserAwardRecordDao;
+import com.tut.infrastructure.persistent.dao.IUserRaffleOrderDao;
 import com.tut.infrastructure.persistent.mapper.AwardMapStructMapper;
 import com.tut.infrastructure.persistent.po.Task;
 import com.tut.infrastructure.persistent.po.UserAwardRecord;
@@ -35,7 +36,7 @@ public class AwardRepository implements IAwardRepository {
     @Resource
     private ITaskDao taskDao;
     @Resource
-    private IUserAwardRecordDao userRaffleOrderDao;
+    private IUserRaffleOrderDao userRaffleOrderDao;
     @Resource
     private IDBRouterStrategy dbRouter;
     @Resource

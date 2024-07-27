@@ -35,7 +35,7 @@ public class RaffleStrategyTest {
 //        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100001L));
 //        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100002L));
 //        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100003L));
-        log.info("测试结果:{}",strategyArmory.assemblyStrategy(100006L));
+        log.info("测试结果:{}",strategyArmory.assembleLotteryStrategy(100006L));
         ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5000L);
 
     }

@@ -28,7 +28,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
     private IStrategyRepository repository;
 
     @Override
-    public boolean assemblyStrategy(Long strategyId) {
+    public boolean assembleLotteryStrategy(Long strategyId) {
         // 1. 查询策略配置
         List<StrategyAwardEntity> strategyAwardEntities = repository.queryStrategyAwardList(strategyId);
 
@@ -58,6 +58,12 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
             assembleLotteryStrategy(String.valueOf(strategyId).concat("_").concat(key), strategyAwardEntitiesClone);
         }
         return true;
+    }
+
+    @Override
+    public boolean assembleLotteryStrategyByActivityId(Long activityId) {
+        Long strategyId = repository.queryStrategyIdByActivityId(activityId);
+        return assembleLotteryStrategy(strategyId);
     }
 
     private void cacheStrategyAwardCountSurplus(Long strategyId,Long awardId, Integer awardCountSurplus) {
