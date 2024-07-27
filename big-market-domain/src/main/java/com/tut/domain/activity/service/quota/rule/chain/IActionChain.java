@@ -1,4 +1,4 @@
-package com.tut.domain.activity.service.rule.chain;
+package com.tut.domain.activity.service.quota.rule.chain;
 
 import com.tut.domain.activity.model.entity.ActivityCountEntity;
 import com.tut.domain.activity.model.entity.ActivityEntity;

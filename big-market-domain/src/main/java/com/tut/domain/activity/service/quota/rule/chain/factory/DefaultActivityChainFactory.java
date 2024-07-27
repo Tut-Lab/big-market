@@ -1,6 +1,6 @@
-package com.tut.domain.activity.service.rule.chain.factory;
+package com.tut.domain.activity.service.quota.rule.chain.factory;
 
-import com.tut.domain.activity.service.rule.chain.IActionChain;
+import com.tut.domain.activity.service.quota.rule.chain.IActionChain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Service;

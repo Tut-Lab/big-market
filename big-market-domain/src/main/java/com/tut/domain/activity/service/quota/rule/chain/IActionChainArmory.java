@@ -1,4 +1,4 @@
-package com.tut.domain.activity.service.rule.chain;
+package com.tut.domain.activity.service.quota.rule.chain;
 
 
 /**

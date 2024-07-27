@@ -1,10 +1,6 @@
 package com.tut.infrastructure.persistent.mapper;
 
-import com.tut.domain.activity.model.aggregate.CreateOrderAggregate;
-import com.tut.domain.activity.model.entity.ActivityCountEntity;
-import com.tut.domain.activity.model.entity.ActivityEntity;
-import com.tut.domain.activity.model.entity.ActivityOrderEntity;
-import com.tut.domain.activity.model.entity.ActivitySkuEntity;
+import com.tut.domain.activity.model.entity.*;
 import com.tut.infrastructure.persistent.po.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
@@ -28,4 +24,12 @@ public interface ActivityMapStructMapper {
     ActivityCountEntity RaffleActivityCountToActivityCountEntity(RaffleActivityCount raffleActivityCounts);
 
     RaffleActivityOrder CreateOrderAggregateToActivityOrderEntity(ActivityOrderEntity activityOrderEntity);
+
+    UserRaffleOrderEntity UserRaffleOrderToUserRaffleOrderEntity(UserRaffleOrder usedRaffleOrder);
+
+    ActivityAccountEntity RaffleActivityAccountToActivityAccountEntity(RaffleActivityAccount raffleActivityAccountRes);
+
+    ActivityAccountMonthEntity RaffleActivityAccountMonthToActivityAccountMonthEntity(RaffleActivityAccountMonth raffleActivityAccountMonthRes);
+
+    ActivityAccountDayEntity RaffleActivityAccountDayToActivityAccountDayEntity(RaffleActivityAccountDay raffleActivityAccountDayRes);
 }

@@ -1,11 +1,11 @@
-package com.tut.domain.activity.service.rule.chain.impl;
+package com.tut.domain.activity.service.quota.rule.chain.impl;
 import com.tut.domain.activity.model.entity.ActivityCountEntity;
 import com.tut.domain.activity.model.entity.ActivityEntity;
 import com.tut.domain.activity.model.entity.ActivitySkuEntity;
 import com.tut.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import com.tut.domain.activity.repository.IActivityRepository;
 import com.tut.domain.activity.service.armory.IActivityDispatch;
-import com.tut.domain.activity.service.rule.chain.AbstractActionChain;
+import com.tut.domain.activity.service.quota.rule.chain.AbstractActionChain;
 import com.tut.types.enums.ResponseCode;
 import com.tut.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;

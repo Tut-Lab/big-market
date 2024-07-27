@@ -1,8 +1,10 @@
 package com.tut.infrastructure.persistent.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,6 +13,9 @@ import java.util.Date;
  * @date 2024-07-20
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RaffleActivityAccount  {
 
 
@@ -70,5 +75,4 @@ public class RaffleActivityAccount  {
      */
     private Date updateTime;
 
-    public RaffleActivityAccount() {}
 }

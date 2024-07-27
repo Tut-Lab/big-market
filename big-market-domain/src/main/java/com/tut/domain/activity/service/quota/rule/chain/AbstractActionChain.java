@@ -1,7 +1,5 @@
-package com.tut.domain.activity.service.rule.chain;
+package com.tut.domain.activity.service.quota.rule.chain;
 
-import com.tut.domain.strategy.service.rule.chain.ILogicChain;
-import com.tut.domain.strategy.service.rule.chain.ILogicChainArmory;
 import lombok.extern.slf4j.Slf4j;
 
 /**

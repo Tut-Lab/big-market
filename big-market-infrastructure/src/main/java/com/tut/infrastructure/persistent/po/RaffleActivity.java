@@ -2,7 +2,6 @@ package com.tut.infrastructure.persistent.po;
 
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
