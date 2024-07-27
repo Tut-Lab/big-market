@@ -1,6 +1,8 @@
 package com.tut.infrastructure.persistent.dao;
 
 import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
+import com.tut.infrastructure.persistent.po.UserAwardRecord;
+import com.tut.infrastructure.persistent.po.UserRaffleOrder;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,4 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 @DBRouterStrategy(splitTable = true)
 public interface IUserAwardRecordDao {
+    void insert(UserAwardRecord userAwardRecord);
+
+    int updateUserRaffleOrderStateUsed(UserRaffleOrder userRaffleOrderReq);
 }

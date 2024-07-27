@@ -7,7 +7,7 @@ import com.tut.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import com.tut.domain.activity.model.entity.*;
 import com.tut.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import com.tut.domain.activity.repository.IActivityRepository;
-import com.tut.infrastructure.event.eventPublisher;
+import com.tut.infrastructure.event.EventPublisher;
 import com.tut.infrastructure.persistent.dao.*;
 import com.tut.infrastructure.persistent.mapper.ActivityMapStructMapper;
 import com.tut.infrastructure.persistent.po.*;
@@ -38,7 +38,7 @@ public class ActivityRepository implements IActivityRepository {
     @Resource
     private IRedisService redisService;
     @Resource
-    private eventPublisher eventPublisher;
+    private EventPublisher eventPublisher;
     @Resource
     private ActivitySkuStockZeroMessageEvent activitySkuStockZeroMessageEvent;
     @Resource

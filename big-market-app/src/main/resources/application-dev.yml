@@ -26,6 +26,7 @@ spring:
         prefetch: 1 # 每次投遞n個消息,消費完再投遞n個
     topic:
       activity_sku_stock_zero: activity_sku_stock_zero
+      send_award: send_award
 
 
 

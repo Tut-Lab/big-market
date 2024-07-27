@@ -21,6 +21,7 @@ public enum ResponseCode {
     ACCOUNT_QUOTA_ERROR("ERR_BIZ_006", "账户额度不足"),
     ACCOUNT_MONTH_QUOTA_ERROR("ERR_BIZ_007", "月账户额度不足"),
     ACCOUNT_DAY_QUOTA_ERROR("ERR_BIZ_008", "日账户额度不足"),
+    ACTIVITY_ORDER_ERROR("ERR_BIZ_009", "用户抽奖单已使用过"),
 
     ;
     private String code;
