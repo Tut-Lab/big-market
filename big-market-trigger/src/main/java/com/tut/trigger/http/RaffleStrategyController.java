@@ -28,7 +28,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "${app.config.cross-origin}")
 @RequestMapping("/api/${app.config.api-version}/raffle/strategy/")
-public class IRaffleStrategyController implements IRaffleStrategyService {
+public class RaffleStrategyController implements IRaffleStrategyService {
 
     @Resource
     private IStrategyArmory strategyArmory;
