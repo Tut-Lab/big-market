@@ -21,6 +21,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static com.tut.types.enums.ResponseCode.UN_ASSEMBLED_STRATEGY_ARMORY;
+import static com.tut.types.enums.ResponseCode.valueOf;
 
 /**
  * @author zsj 【352326430@qq.com】
@@ -292,5 +293,18 @@ public class StrategyRepository implements IStrategyRepository {
         if (null == raffleActivityAccountDay) return 0;
         // 总次数 - 剩余的，等于今日参与的
         return raffleActivityAccountDay.getDayCount() - raffleActivityAccountDay.getDayCountSurplus();
+    }
+
+    @Override
+    public Map<String, Integer> queryAwardRuleLockCount(String... treeIds) {
+        if(null==treeIds || treeIds.length==0) return new HashMap<>();
+        List<RuleTreeNode> ruleTreeNodes = ruleTreeNodeDao.queryRuleLocks(treeIds);
+        Map<String, Integer> resultMap = new HashMap<>();
+        for (RuleTreeNode node : ruleTreeNodes) {
+            String treeId = node.getTreeId();
+            Integer ruleValue = Integer.valueOf(node.getRuleValue());
+            resultMap.put(treeId,ruleValue);
+        }
+        return resultMap;
     }
 }

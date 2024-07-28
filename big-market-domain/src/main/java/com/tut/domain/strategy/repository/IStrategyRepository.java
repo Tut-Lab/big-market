@@ -9,6 +9,7 @@ import com.tut.domain.strategy.model.valobj.StrategyRuleModelVO;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zsj 【352326430@qq.com】
@@ -102,4 +103,6 @@ public interface IStrategyRepository {
     Long queryStrategyIdByActivityId(Long activityId);
 
     Integer queryTodayUserRaffleCount(String userId, Long strategyId);
+
+    Map<String, Integer> queryAwardRuleLockCount(String... treeIds);
 }
