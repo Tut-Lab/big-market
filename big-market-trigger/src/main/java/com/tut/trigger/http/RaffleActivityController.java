@@ -63,17 +63,17 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Override
     public Response<Boolean> armory(@RequestParam Long activityId) {
         try {
-            log.info("抽奖活动装配开始 activityId: {}",activityId);
+            log.info("抽奖活动装配开始 activityId: {}", activityId);
             boolean activityArmoryStatus = activityArmory.assembleActivitySkuByActivityId(activityId);
             boolean strategyArmoryStatus = strategyArmory.assembleLotteryStrategyByActivityId(activityId);
             Response<Boolean> response = Response.<Boolean>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
                     .build();
-            log.info("抽奖活动装配完成 strategyId: {} response：{}",activityId, JSON.toJSONString(response));
+            log.info("抽奖活动装配完成 strategyId: {} response：{}", activityId, JSON.toJSONString(response));
             return response;
-        }catch (Exception e){
-            log.error("抽奖活动装配失败 strategyId: {}",activityId);
+        } catch (Exception e) {
+            log.error("抽奖活动装配失败 strategyId: {}", activityId);
             return Response.<Boolean>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getCode())
@@ -89,13 +89,13 @@ public class RaffleActivityController implements IRaffleActivityService {
      * <p>
      * 接口：<a href="http://localhost:8091/api/v1/raffle/activity/draw">/api/v1/raffle/activity/draw</a>
      * 入参：{"activityId":100001,"userId":"xiaofuge"}
-     *
+     * <p>
      * curl --request POST \
-     *   --url http://localhost:8091/api/v1/raffle/activity/draw \
-     *   --header 'content-type: application/json' \
-     *   --data '{
-     *     "userId":"xiaofuge",
-     *     "activityId": 100301
+     * --url http://localhost:8091/api/v1/raffle/activity/draw \
+     * --header 'content-type: application/json' \
+     * --data '{
+     * "userId":"xiaofuge",
+     * "activityId": 100301
      * }'
      */
     @RequestMapping(value = "draw", method = RequestMethod.POST)
@@ -103,16 +103,17 @@ public class RaffleActivityController implements IRaffleActivityService {
     public Response<ActivityDrawResponseDTO> draw(@RequestBody ActivityDrawRequestDTO request) {
         try {
             // 1. 参数校验
-            if (StringUtils.isBlank(request.getUserId()) || null == request.getActivityId()){
+            if (StringUtils.isBlank(request.getUserId()) || null == request.getActivityId()) {
                 throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
             }
             // 2. 参与活动 - 创建参与记录订单
-            UserRaffleOrderEntity orderEntity  = raffleActivityAccountPartakeService.createOrder(request.getUserId(), request.getActivityId());
+            UserRaffleOrderEntity orderEntity = raffleActivityAccountPartakeService.createOrder(request.getUserId(), request.getActivityId());
             log.info("活动抽奖，创建订单 userId:{} activityId:{} orderId:{}", request.getUserId(), request.getActivityId(), orderEntity.getOrderId());
             // 3. 抽奖策略 - 执行抽奖
             RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(RaffleFactorEntity.builder()
                     .userId(orderEntity.getUserId())
                     .strategyId(orderEntity.getStrategyId())
+                    .endDateTime(orderEntity.getEndDateTime())
                     .build());
             // 4. 存放结果 - 写入中奖记录
 
@@ -137,7 +138,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                             .awardIndex(raffleAwardEntity.getSort())
                             .build())
                     .build();
-        }catch (AppException e) {
+        } catch (AppException e) {
             log.error("活动抽奖失败 userId:{} activityId:{}", request.getUserId(), request.getActivityId(), e);
             return Response.<ActivityDrawResponseDTO>builder()
                     .code(e.getCode())
@@ -150,7 +151,6 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();
         }
-
 
 
     }

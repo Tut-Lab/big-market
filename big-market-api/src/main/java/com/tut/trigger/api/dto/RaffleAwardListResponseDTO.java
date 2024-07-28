@@ -43,5 +43,5 @@ public class RaffleAwardListResponseDTO {
     /**
      * 等待解锁次数 - 规则的抽奖N次解锁 - 用户已经抽奖次数
      */
-    private Integer waitUnlockCount;
+    private Integer waitUnLockCount;
 }

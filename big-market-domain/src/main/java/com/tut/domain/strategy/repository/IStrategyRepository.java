@@ -7,6 +7,7 @@ import com.tut.domain.strategy.model.valobj.RuleTreeVO;
 import com.tut.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import com.tut.domain.strategy.model.valobj.StrategyRuleModelVO;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,7 @@ public interface IStrategyRepository {
     void cacheStrategyAwardCountSurplus(String cacheKey, Integer awardCountSurplus);
 
     Boolean subtractionAwardStock(String cacheKey);
+    Boolean subtractionAwardStock(String cacheKey, Date endTime);
 
     void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
 

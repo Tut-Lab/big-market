@@ -3,6 +3,8 @@ package com.tut.domain.strategy.service.rule.tree;
 import com.tut.domain.strategy.model.entity.RuleActionEntity;
 import com.tut.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
+import java.util.Date;
+
 /**
  * @author zsj 【352326430@qq.com】
  * @description 规则树接口
@@ -10,5 +12,5 @@ import com.tut.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
  */
 public interface ILogicTreeNode {
 
-    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId,String ruleValue);
+    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId,String ruleValue, Date endTime);
 }

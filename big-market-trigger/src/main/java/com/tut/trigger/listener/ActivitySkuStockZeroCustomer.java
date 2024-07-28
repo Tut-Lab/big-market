@@ -34,7 +34,7 @@ public class ActivitySkuStockZeroCustomer {
             Long sku = eventMessage.getData();
             // 更新庫存
             skuStock.clearActivitySkuStock(sku);
-            // 清空隊列 [此時就不需要延遲更新數據庫記錄了]
+            // 清空隊列 [此時就不需要延遲更新數據庫記錄了] todo 清空时，需要设定sku标识，不能全部清空
             skuStock.clearQueueValue();
         }catch (Exception e){
             log.error("監聽活動sku庫存消耗為0消息，失敗 topic: {} message: {}",topic,message);
