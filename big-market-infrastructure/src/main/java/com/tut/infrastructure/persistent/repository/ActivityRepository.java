@@ -88,6 +88,8 @@ public class ActivityRepository implements IActivityRepository {
         if (activityEntity != null) return activityEntity;
         RaffleActivity raffleActivity = raffleActivityDao.queryRaffleActivityByActivityId(activityId);
         activityEntity = ActivityMapStructMapper.INSTANCE.RaffleActivityToActivityEntity(raffleActivity);
+        // 存入缓存
+        redisService.setValue(cacheKey, activityEntity);
         return activityEntity;
     }
 
@@ -98,6 +100,8 @@ public class ActivityRepository implements IActivityRepository {
         if(activityCountEntity!=null) return activityCountEntity;
         RaffleActivityCount raffleActivityCounts = raffleActivityCountDao.queryRaffleActivityCountByActivityCountId(activityCountId);
         activityCountEntity = ActivityMapStructMapper.INSTANCE.RaffleActivityCountToActivityCountEntity(raffleActivityCounts);
+        // 存入缓存
+        redisService.setValue(cacheKey, activityCountEntity);
         return activityCountEntity;
 
     }
